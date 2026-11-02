@@ -90,5 +90,49 @@
     else if (action === 'toggle' && 'done' in list[index]) { list[index].done = !list[index].done; toast(list[index].done ? 'Marked complete.' : 'Marked as active.'); }
     save();
   });
+  $('exportBackup').addEventListener('click', () => {
+    const backup = { app: 'LIFEOS AI', version: 1, exportedAt: new Date().toISOString(), data };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'lifeos-ai-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    toast('Backup downloaded.');
+  });
+
+  $('importBackup').addEventListener('click', () => $('backupFile').click());
+  $('backupFile').addEventListener('change', async (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    try {
+      if (file.size > 2 * 1024 * 1024) throw new Error('Backup file is larger than 2 MB.');
+      const backup = JSON.parse(await file.text());
+      const keys = ['goals', 'tasks', 'transactions', 'learning', 'opportunities'];
+      if (!backup || backup.app !== 'LIFEOS AI' || backup.version !== 1 || !backup.data || typeof backup.data !== 'object') {
+        throw new Error('This is not a supported LIFEOS AI backup.');
+      }
+      if (!keys.every(key => Array.isArray(backup.data[key]))) throw new Error('Backup data is incomplete or invalid.');
+      const validItems = keys.every(key => backup.data[key].every(item => {
+        if (!item || typeof item !== 'object' || typeof item.id !== 'string' || typeof item.title !== 'string') return false;
+        if (key === 'goals' || key === 'tasks' || key === 'learning') return typeof item.done === 'boolean';
+        if (key === 'transactions') return Number.isFinite(Number(item.amount)) && Number(item.amount) > 0 && ['income', 'expense'].includes(item.type);
+        return true;
+      }));
+      if (!validItems) throw new Error('Backup contains invalid records.');
+      if (!confirm('Restore this backup? Your current LIFEOS data on this device will be replaced.')) return;
+      data = JSON.parse(JSON.stringify(backup.data));
+      save();
+      toast('Backup restored successfully.');
+    } catch (error) {
+      toast(error.message || 'Could not restore this backup.');
+    } finally {
+      event.target.value = '';
+    }
+  });
+
   render();
 })();
