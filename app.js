@@ -135,4 +135,13 @@
   });
 
   render();
+
+  // Register the offline app shell. Existing LIFEOS data remains in localStorage.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {
+        // The app remains usable online even if offline setup is unavailable.
+      });
+    });
+  }
 })();
