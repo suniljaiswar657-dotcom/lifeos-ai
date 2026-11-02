@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b12" />
+  <meta name="description" content="LIFEOS AI — your personal operating system for goals, productivity, money and learning." />
+  <title>LIFEOS AI — Personal Operating System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="LIFEOS AI home"><span class="brand-mark">L</span><span>LIFEOS <b>AI</b><small>PERSONAL SYSTEM</small></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-page="overview"><span>◫</span> Overview</button>
+        <button class="nav-item" data-page="goals"><span>◎</span> Goals</button>
+        <button class="nav-item" data-page="tasks"><span>☷</span> Tasks</button>
+        <button class="nav-item" data-page="money"><span>◈</span> Money</button>
+        <button class="nav-item" data-page="learning"><span>▤</span> Learning</button>
+        <button class="nav-item" data-page="opportunities"><span>✧</span> Opportunities</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="status-dot"></div><span>Personal workspace</span><span class="version">v0.1</span></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuToggle" aria-label="Open menu">☰</button>
+        <div class="breadcrumb">LIFEOS <span>/</span> <b id="pageCrumb">Overview</b></div>
+        <div class="topbar-right"><span class="system-status"><i></i> SYSTEM ONLINE</span><div class="avatar">S</div></div>
+      </header>
+
+      <section class="page active" id="page-overview">
+        <div class="welcome-row"><div><div class="eyebrow">MONDAY, YOUR SPACE TO RESET</div><h1>Command your <em>day.</em></h1><p class="muted">One clear view of what matters. Your life, organized.</p></div><div class="date-chip" id="todayDate">TODAY</div></div>
+        <div class="hero-card"><div class="hero-glow"></div><div class="hero-copy"><span class="eyebrow light">LIFEOS INTELLIGENCE</span><h2>Your next move<br/>starts <em>with clarity.</em></h2><p>Small consistent actions create meaningful progress. Pick one priority and move it forward.</p><button class="primary-btn" data-go="tasks">View today's tasks <span>↗</span></button></div><div class="hero-orbit"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core">L<span>AI</span></div><div class="orbit-tag tag-top">FOCUS</div><div class="orbit-tag tag-bottom">PROGRESS</div></div></div>
+        <div class="section-heading"><div><span class="eyebrow">YOUR OVERVIEW</span><h2>At a glance</h2></div><span class="muted small">Live from this device</span></div>
+        <div class="stats-grid"><article class="stat-card"><div class="stat-top"><span>Active goals</span><span class="stat-icon">◎</span></div><strong id="statGoals">0</strong><small>Goals in progress</small></article><article class="stat-card"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon">✓</span></div><strong id="statTasks">0</strong><small>Completed tasks</small></article><article class="stat-card"><div class="stat-top"><span>Net balance</span><span class="stat-icon">₹</span></div><strong id="statBalance">₹0</strong><small>Income minus expenses</small></article><article class="stat-card"><div class="stat-top"><span>Learning streak</span><span class="stat-icon">✧</span></div><strong id="statLearning">0%</strong><small>Learning progress</small></article></div>
+        <div class="dashboard-grid"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">EXECUTION</span><h3>Today's tasks</h3></div><button class="text-btn" data-go="tasks">View all ↗</button></div><div id="overviewTasks" class="task-preview empty-state">No tasks yet. Add your first task to get moving.</div></article><article class="panel focus-panel"><div class="panel-heading"><div><span class="eyebrow">NORTH STAR</span><h3>Goal progress</h3></div><button class="text-btn" data-go="goals">Manage ↗</button></div><div id="overviewGoals" class="goal-preview empty-state">Your goals will appear here.</div></article></div>
+      </section>
+
+      <section class="page" id="page-goals"><div class="page-heading"><div><span class="eyebrow">DIRECTION & PURPOSE</span><h1>Your goals</h1><p class="muted">Turn what matters into measurable progress.</p></div></div><div class="panel form-panel"><form id="goalForm" class="inline-form"><label>New goal<input id="goalInput" maxlength="90" placeholder="e.g. Build a new skill" required /></label><label class="date-field">Target date<input id="goalDate" type="date" /></label><button class="primary-btn" type="submit">Add goal +</button></form></div><div id="goalList" class="card-list empty-state">No goals added yet.</div></section>
+
+      <section class="page" id="page-tasks"><div class="page-heading"><div><span class="eyebrow">DAILY EXECUTION</span><h1>Task manager</h1><p class="muted">Keep the next action visible and achievable.</p></div></div><div class="panel form-panel"><form id="taskForm" class="inline-form"><label>Task<input id="taskInput" maxlength="100" placeholder="What needs to get done?" required /></label><label class="date-field">Due date<input id="taskDate" type="date" /></label><button class="primary-btn" type="submit">Add task +</button></form></div><div class="list-toolbar"><span class="eyebrow">YOUR TASKS</span><span class="muted small" id="taskCount">0 tasks</span></div><div id="taskList" class="card-list empty-state">Nothing on your list. Add one useful next action.</div></section>
+
+      <section class="page" id="page-money"><div class="page-heading"><div><span class="eyebrow">PERSONAL FINANCE</span><h1>Money overview</h1><p class="muted">A simple picture of money coming in and going out.</p></div></div><div class="money-summary"><div class="money-tile"><span>Total income</span><strong id="moneyIncome">₹0</strong></div><div class="money-tile"><span>Total expenses</span><strong id="moneyExpense">₹0</strong></div><div class="money-tile balance-tile"><span>Net balance</span><strong id="moneyNet">₹0</strong></div></div><div class="panel form-panel"><form id="moneyForm" class="inline-form money-form"><label>Description<input id="moneyDesc" maxlength="70" placeholder="e.g. Freelance payment" required /></label><label>Amount (₹)<input id="moneyAmount" type="number" min="1" step="0.01" placeholder="500" required /></label><label>Type<select id="moneyType"><option value="income">Income</option><option value="expense">Expense</option></select></label><button class="primary-btn" type="submit">Add entry +</button></form></div><div class="list-toolbar"><span class="eyebrow">TRANSACTIONS</span></div><div id="moneyList" class="card-list empty-state">No transactions recorded.</div></section>
+
+      <section class="page" id="page-learning"><div class="page-heading"><div><span class="eyebrow">CONTINUOUS GROWTH</span><h1>Learning studio</h1><p class="muted">Track the skills and knowledge you are building.</p></div></div><div class="panel learning-card"><div><span class="eyebrow">YOUR PROGRESS</span><h2 id="learningPercent">0% complete</h2><p class="muted">Every session moves the bar forward.</p></div><div class="progress-ring" id="learningRing"><span id="learningRingText">0%</span></div></div><div class="panel form-panel"><form id="learningForm" class="inline-form"><label>Learning milestone<input id="learningInput" maxlength="90" placeholder="e.g. Complete JavaScript basics" required /></label><button class="primary-btn" type="submit">Add milestone +</button></form></div><div id="learningList" class="card-list empty-state">Add a milestone to start tracking.</div></section>
+
+      <section class="page" id="page-opportunities"><div class="page-heading"><div><span class="eyebrow">EXPLORE WHAT'S NEXT</span><h1>Opportunity radar</h1><p class="muted">A space to collect promising next steps.</p></div></div><div class="panel form-panel"><form id="opportunityForm" class="inline-form"><label>Opportunity<input id="opportunityInput" maxlength="100" placeholder="e.g. Apply for a remote role" required /></label><button class="primary-btn" type="submit">Save opportunity +</button></form></div><div id="opportunityList" class="card-list empty-state">No opportunities saved yet.</div></section>
+
+      <footer class="footer"><span>© 2026 LIFEOS AI</span><span>Built for intentional progress <b>✦</b></span><span>YOUR DATA STAYS ON THIS DEVICE</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
