@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "LIFEOS AI — Personal Operating System",
+  "short_name": "LIFEOS AI",
+  "description": "Your personal operating system for goals, tasks, money and learning.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#080b12",
+  "theme_color": "#080b12",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
